@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "This is social media website ",
+  "keywords": [],
+  "homepage": "https://github.com/gambare2/archVid-backend#readme",
+  "bugs": {
+    "url": "https://github.com/gambare2/archVid-backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gambare2/archVid-backend.git"
+  },
+  "license": "ISC",
+  "author": "gambare2",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
