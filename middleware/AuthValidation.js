@@ -1,12 +1,15 @@
 import Joi from 'joi';
 
 
-const registerValidation = (req, res, next ) => {
+export const registerValidation = (req, res, next ) => {
     const schema = Joi.object({
-        email: Joi.string().required().email(),
-        phoneno: Joi.string().required().phoneno(),
-        password: Joi.string().required().password(),
-    })
+        email: Joi.string().email().optional(),
+    phoneno: Joi.string()
+      .pattern(/^[0-9]{10}$/) 
+      .optional(),
+    password: Joi.string().min(6).required(),
+  }).or("email", "phoneno");
+
     const {error, value} = schema.validate(req.body);
     if (error){
         return res.status(400).json({
@@ -17,8 +20,19 @@ const registerValidation = (req, res, next ) => {
     next()
 }
 
+export const loginValidation = (req, res, next) => {
+    const schema = Joi.object({
+        phonenoOremail: Joi.string().required(),
+        password: Joi.string().required()
+    }).or("phonenoOremail");
+    const { error } = schema.validate(req.body);
+    if (error) {
+        return res.status(400).json({
+            message: "Bad request", error
+        })
+    }
+    next()
+};
 
 
 
-
-export default registerValidation;
