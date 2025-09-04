@@ -31,11 +31,11 @@ export const register = async (req, res) => {
       });
     }
 
-    // hash password
+
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // save new user
+
     const newuser = new UserModal({
       email: email || null,
       phoneno: phoneno || null,
@@ -44,7 +44,6 @@ export const register = async (req, res) => {
 
     await newuser.save();
 
-    // issue JWT
     const token = jwt.sign(
       { id: newuser._id },
       process.env.JWT_SECRET,
@@ -95,7 +94,6 @@ export const login = async (req, res) => {
       return res.status(403).json({ message: errorMessage, success: false });
     }
 
-    // ✅ issue JWT
     const token = jwt.sign(
       { id: user._id, email: user.email },
       process.env.JWT_SECRET,
@@ -105,7 +103,7 @@ export const login = async (req, res) => {
     res.status(200).json({
       message: "Login successful",
       success: true,
-      token, // frontend should use this
+      token,
       user: {
         id: user._id,
         email: user.email,

@@ -9,6 +9,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.post("/api/profile/upload", upload.single("profileimage"), (req, res) => {
-  const fileUrl = `http://localhost:3000/uploads/${req.file.filename}`;
+  const fileUrl = `${import.meta.env.VITE_API_URL}/uploads/${req.file.filename}`
+  // `http://localhost:3000/uploads/${req.file.filename}`;
   res.json({ url: fileUrl });
 });

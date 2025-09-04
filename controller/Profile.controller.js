@@ -11,7 +11,7 @@ export const getMyProfile = async (req, res) => {
 
     res.status(200).json({
       message: "Profile fetched successfully",
-      profile, // ✅ always wrapped
+      profile,
     });
   } catch (error) {
     console.error("[GET MY PROFILE ERROR]", error);
@@ -23,9 +23,9 @@ export const editProfile = async (req, res) => {
   try {
     const { username, name, website, bio, gender } = req.body;
 
-    // If user uploaded an image, use its URL; otherwise keep old one
     let profileimage = req.file
-      ? `http://localhost:3000/uploads/${req.file.filename}`
+      // ? `http://localhost:3000/uploads/${req.file.filename}`
+      ? `${import.meta.env.VITE_API_URL}/uploads/${req.file.filename}`
       : undefined;
 
     const profile = await Profile.findOneAndUpdate(
@@ -77,7 +77,7 @@ export const getProfileByUsername = async (req, res) => {
 
     res.status(200).json({
       message: "Profile fetched successfully",
-      profile, // ✅ same shape as others
+      profile,
     });
   } catch (error) {
     console.error("[GET PROFILE BY USERNAME ERROR]", error);
