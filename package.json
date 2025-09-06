@@ -17,8 +17,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "node indecx.js",
-    "build": "node build"
+    "start": "node index.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
